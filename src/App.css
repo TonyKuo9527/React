@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.accordion-item {
+  border: none;
+}
+
+.accordion-button::after {
+  display: none;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #6c757d !important; /* 灰色背景 */
+  color: white !important; /* 白色文字 */
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #6c757d !important; /* 使用灰色背景 */
+  color: #fff !important; /* 改變文字顏色 */
+  border-color: #6c757d !important; /* 改變邊框顏色 */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
