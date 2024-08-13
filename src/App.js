@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-import { Navbar, Nav, Container, Row, Col, Accordion } from 'react-bootstrap';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useState } from "react";
+import { Container, Row, Col, Navbar } from "react-bootstrap";
+import {
+  Route,
+  Routes,
+  NavLink,
+  BrowserRouter as Router,
+} from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-import sidebarsConfig from './sidebarsConfig';
+import Sidebar from "./layout/Sidebar";
+import UserInfo from "./layout/UserInfo";
 
-import Dashboard from './components/dashboard';
-import Settings from './components/settings';
+import Dashboard from "./components/Dashboard";
+
+import CertifyQuery from "./components/CertifyQuery";
+import TechnicianSkillStatus from "./components/TechnicianSkillStatus";
+
+import RegionCodeSettings from "./components/RegionCodeSettings";
+import MachineModelMaintenance from "./components/MachineModelMaintenance";
+import RegionSkillMachineMaintenance from "./components/RegionSkillMachineMaintenance";
+import CertifyManualInput from "./components/CertifyManualInput";
+
+import EmployeeDataSettings from "./components/EmployeeDataSettings";
+import HRSynchronizationSettings from "./components/HRSynchronizationSettings";
+
+import MOCodeSettings from "./components/MOCodeSettings";
+import MORecordMaintenance from "./components/MORecordMaintenance";
 
 function App() {
   return (
@@ -18,6 +37,7 @@ function App() {
 
 function MainApp() {
   const [activeKey, setActiveKey] = useState(null);
+  const [userName] = useState("UserName");
 
   const handleSelect = (eventKey) => {
     setActiveKey(activeKey === eventKey ? null : eventKey);
@@ -25,36 +45,62 @@ function MainApp() {
 
   return (
     <Container fluid>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand as={NavLink} to="/">Try</Navbar.Brand>
-      </Navbar>
       <Row>
-        <Col xs={2}>
-          <Accordion activeKey={activeKey} onSelect={handleSelect}>
-            {sidebarsConfig.accordionItems.map((item, index) => (
-              <Accordion.Item eventKey={item.eventKey} key={index}>
-                <Accordion.Header><i className={`bi ${item.icon}`} style={{ fontSize: '2rem', color: 'red' }} />{item.header}</Accordion.Header>
-                <Accordion.Body>
-                  <Nav variant="pills" className="flex-column">
-                    {item.links.map((link, linkIndex) => (
-                      <Nav.Item key={linkIndex}>
-                        <Nav.Link as={NavLink} to={link.to} activeClassName="active">
-                          <i className={`bi ${link.icon}`} style={{ fontSize: '2rem', color: 'red' }} />
-                          {link.label}
-                        </Nav.Link>
-                      </Nav.Item>
-                    ))}
-                  </Nav>
-                </Accordion.Body>
-              </Accordion.Item>
-            ))}
-            </Accordion>
+        <Col xl={2}>
+          <Container fluid className="p-3">
+            <Navbar expand="lg" className="bg-body-tertiary">
+              <Container>
+                <Navbar.Brand as={NavLink} to="/" exact>
+                  HRMS
+                </Navbar.Brand>
+              </Container>
+            </Navbar>
+            <Sidebar activeKey={activeKey} handleSelect={handleSelect} />
+            <UserInfo userName={userName} />
+          </Container>
         </Col>
-        <Col xs={10}>
+        <Col xl={10}>
           <Container className="p-3">
             <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/" element={<Dashboard />} />
+
+              <Route path="/CertifyQuery" element={<CertifyQuery />} />
+              <Route
+                path="/TechnicianSkillStatus"
+                element={<TechnicianSkillStatus />}
+              />
+
+              <Route
+                path="/RegionCodeSettings"
+                element={<RegionCodeSettings />}
+              />
+              <Route
+                path="/MachineModelMaintenance"
+                element={<MachineModelMaintenance />}
+              />
+              <Route
+                path="/RegionSkillMachineMaintenance"
+                element={<RegionSkillMachineMaintenance />}
+              />
+              <Route
+                path="/CertifyManualInput"
+                element={<CertifyManualInput />}
+              />
+
+              <Route
+                path="/EmployeeDataSettings"
+                element={<EmployeeDataSettings />}
+              />
+              <Route
+                path="/HRSynchronizationSettings"
+                element={<HRSynchronizationSettings />}
+              />
+
+              <Route path="/MOCodeSettings" element={<MOCodeSettings />} />
+              <Route
+                path="/MORecordMaintenance"
+                element={<MORecordMaintenance />}
+              />
             </Routes>
           </Container>
         </Col>
