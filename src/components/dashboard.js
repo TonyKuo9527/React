@@ -191,9 +191,16 @@ function Dashboard() {
 
         const hasChanged = fieldsToWatch.some((field) => {
             const currentValue = currentRow[field];
-            const originalValue = originalRow[field];
+            const originalValue = originalRow[field]
+            if (field === "field3") {
+                const currentDate = new Date(currentValue);
+                const originalDate = new Date(`${originalValue}T00:00:00`);
         
-            if (typeof currentValue === 'string' && !isNaN(currentValue)) {
+                currentDate.setHours(0, 0, 0, 0);
+                originalDate.setHours(0, 0, 0, 0);
+        
+                return currentDate.getTime() !== originalDate.getTime();
+            } else if (typeof currentValue === 'string' && !isNaN(currentValue)) {
                 return parseFloat(currentValue) !== originalValue;
             } else if (typeof originalValue === 'string' && !isNaN(originalValue)) {
                 return parseFloat(originalValue) !== currentValue;
