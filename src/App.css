@@ -69,6 +69,19 @@
   flex: 1; /* 讓表格容器填滿剩餘空間 */
 }
 
+.table-tools-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.ag-header-cell-label {
+  justify-content: center; /* 水平置中 */
+  text-align: center; /* 確保文字置中 */
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
